@@ -1,0 +1,65 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.installed.cfg
+*.egg
+build/
+dist/
+
+# uv / virtualenvs
+.venv/
+venv/
+env/
+.uv/
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Logs / outputs
+logs/
+*.log
+*.tmp
+*.bak
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Datasets (do not commit raw or processed data)
+data/
+*.nii
+*.nii.gz
+*.npz
+*.npy
+*.tar
+*.h5
+*.hdf5
+
+# Predictions / cache (regenerate from checkpoints)
+predictions/
+*.csv
+!configs/*.csv
+_radbert_cache/
+care_rg_retrieved/
+care_rg_summarized/
+ensemble_*_label/
+
+# Checkpoint binaries (keep dir structure only)
+checkpoints/**/*.pt
+checkpoints/**/*.pth
+checkpoints/**/*.bin
+checkpoints/**/*.safetensors
+checkpoints/**/optimizer.pt
+checkpoints/**/scheduler.pt
+
+# Local secrets / env
+.env
+.env.*
+secrets/

@@ -1,0 +1,32 @@
+# Inference configuration shared across all three CARE-RG members
+# and across all three held-out tiers (RG / CT-RATE / INSPECT).
+# These are the tier-invariant hyperparameters of paper Sec. IV-E
+# ("Stage 5: Tier-Invariant Inference Policy").
+
+stochastic_decoding:                         # Stage 2
+  K: 10                                       # number of candidate reports per member
+  temperature_window: [0.7, 1.3]              # linearly staggered across K candidates
+  top_k: 50                                   # multinomial top-k truncation
+  no_greedy: true                             # disable greedy candidate (see Stage 2)
+  aggregator: union                           # concat the K candidates into R_p(V)
+
+radbert:                                      # Stage 3
+  pretrained: zzxslp/RadBERT-RoBERTa-4m
+  num_conditions: 18
+  max_length: 512
+  threshold: 0.5                              # sigmoid threshold for binary labels
+
+fusion:                                       # Stage 4
+  operator: logical_or                        # \hat{y}_c = OR_p b_p_c
+  ensemble: [generator_R_1, generator_R_2, generator_P]
+
+text_head:                                    # Stage 5
+  top_k_per_condition: 3
+  agreement_jaccard_threshold: 0.4            # 5-gram Jaccard for cross-member corroboration
+  length_cap_words: 80
+  scoring_weights:
+    measurement: 5.0                           # lambda_M
+    location: 2.0                              # lambda_L
+    word_count: 0.1                            # lambda_W
+    agreement: 3.0                             # lambda_A
+    pollution_penalty: 4.0                     # lambda_Pi

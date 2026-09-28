@@ -1,0 +1,44 @@
+# Training configuration for a single CARE-RG ensemble member.
+# Reproduces the recipe described in Section IV-A of the paper.
+# The three ensemble members share this recipe and differ only in:
+#   * generator_R_1: Reg2RG-initialised, seed=1
+#   * generator_R_2: Reg2RG-initialised, seed=2
+#   * generator_P:   Reg2RG-warmstart with auxiliary 18-condition head + seed=1
+
+experiment:
+  name: care_rg_member
+  seed: 1
+  output_dir: checkpoints/generator_R_1     # change per member
+  init_from: reg2rg                          # {reg2rg, pathology_warmstart}
+
+data:
+  train_split: radgenome_24k_train
+  val_split:   radgenome_1564_val
+  vision_x_key: vision_x                     # WDS sample key (dict of per-region tensors)
+  text_key: combined_report
+  max_seq_length: 300
+  num_workers: 8
+
+model:
+  vision_encoder: vit_3d
+  vision_input: [240, 480, 480]              # frames x H x W after preprocessing
+  patch_size: [12, 24, 24]
+  lm_backbone: meta-llama/Llama-2-7b-chat-hf
+  trainable_params: lora                     # PEFT/LoRA fine-tuning
+  lora_rank: 8
+  lora_alpha: 16
+
+train:
+  epochs: 5
+  batch_size: 8                              # effective bs=8 with gradient accumulation
+  grad_accum: 1
+  optimizer: adamw
+  learning_rate: 1.0e-5
+  weight_decay: 1.0e-2
+  warmup_ratio: 0.03
+  precision: bf16
+
+logging:
+  log_every: 50
+  save_every: 1                              # save 1 ckpt per epoch
+  eval_every: 1

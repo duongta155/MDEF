@@ -1,0 +1,15 @@
+# Central path configuration. All scripts and modules read this file.
+# Edit these paths to point at your local data layout before running anything.
+
+global:
+  data_root: "/data"                          # base directory for all datasets
+  radgenome_path: "/data/radgenome_chestct"   # RadGenome-ChestCT (training + RG validation)
+  ctrate_path:    "/data/ctrate"              # CT-RATE (cross-dataset validation)
+  inspect_path:   "/data/inspect"             # INSPECT (cross-institution validation)
+  radbert_ckpt:   "/data/radbert/RadBertClassifier.pth"  # 18-condition RadBERT extractor
+
+workspace:
+  processed_data: "/data/care_rg/processed"   # WDS shards, cached labels
+  checkpoints:    "checkpoints"               # generator checkpoints
+  predictions:    "predictions"               # per-tier predictions.csv + ce_summary.json
+  retrieved:      "predictions/retrieved"     # Stage 5 text-head outputs
