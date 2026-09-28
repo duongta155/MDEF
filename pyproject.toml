@@ -1,7 +1,7 @@
 [project]
-name = "care-rg"
+name = "mdef"
 version = "0.1.0"
-description = "CARE-RG: Candidate Aggregation with Recall-Enhanced Ensembling for 3D CT Report Generation"
+description = "MDEF: Candidate Aggregation with Recall-Enhanced Ensembling for 3D CT Report Generation"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [

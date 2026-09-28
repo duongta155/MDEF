@@ -5,6 +5,6 @@
 source "$(dirname "$0")/../base.sh"
 
 $PY -m src.fusion.logical_or \
-    --infer_config configs/care_rg_infer.yaml \
+    --infer_config configs/mdef_infer.yaml \
     --predictions_root "$PRED_ROOT" \
     --output_root "$PRED_ROOT/ensemble_3way_or"

@@ -5,7 +5,7 @@
 source "$(dirname "$0")/../base.sh"
 
 $PY -m src.training.trainer \
-    --config configs/care_rg_train.yaml \
+    --config configs/mdef_train.yaml \
     --seed 1 \
     --init_from pathology_warmstart \
-    --output_dir "$CKPT_ROOT/generator_P"
+    --output_dir "$CKPT_ROOT/generator_3"

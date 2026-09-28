@@ -5,7 +5,7 @@
 source "$(dirname "$0")/../base.sh"
 
 $PY -m src.training.trainer \
-    --config configs/care_rg_train.yaml \
+    --config configs/mdef_train.yaml \
     --seed 2 \
     --init_from reg2rg \
-    --output_dir "$CKPT_ROOT/generator_R_2"
+    --output_dir "$CKPT_ROOT/generator_2"

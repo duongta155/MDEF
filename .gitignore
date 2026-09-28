@@ -47,8 +47,8 @@ predictions/
 *.csv
 !configs/*.csv
 _radbert_cache/
-care_rg_retrieved/
-care_rg_summarized/
+mdef_retrieved/
+mdef_summarized/
 ensemble_*_label/
 
 # Checkpoint binaries (keep dir structure only)

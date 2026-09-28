@@ -8,9 +8,9 @@ baseline (Reg2RG, CT-GRAPH, MARCH) on every tier and every NLG metric.
 Mirrors paper Table V's CE-F1 bootstrap CIs at the NLG level.
 
 For each (tier, baseline, metric):
-  1. Align baseline + CARE-RG predictions by volume_name (intersection).
+  1. Align baseline + MDEF predictions by volume_name (intersection).
   2. Bootstrap B=2000 resamples WITH REPLACEMENT over volume indices.
-  3. For each resample, compute (NLG_CARE-RG - NLG_baseline).
+  3. For each resample, compute (NLG_MDEF - NLG_baseline).
   4. Report mean, lower 2.5%, upper 97.5% as the 95% CI.
 
 GPU is used for batch RadBERT inference on the resampled subsets is NOT
@@ -33,7 +33,7 @@ import torch
 from concurrent.futures import ProcessPoolExecutor, as_completed
 
 A = "<DATA_ROOT>/predictions"
-OUT_ROOT = os.path.join(A, "care_rg_bootstrap_nlg")
+OUT_ROOT = os.path.join(A, "mdef_bootstrap_nlg")
 CLASSIFIER_DIR = ("<USER_ROOT>/source_code/"
                    "Medical_Report_Generation/Baseline_Model/"
                    "Reg2RG/evaluation/ce_evaluator_ct2rep")
@@ -52,19 +52,19 @@ PRED_PATHS = {
         "Reg2RG":   f"{A}/n_march_resident_24kwds/n_march_resident/eval_radgenome/predictions.csv",
         "CT-GRAPH": f"{A}/n_ct_graph_24kwds/n_ct_graph/eval_radgenome/predictions.csv",
         "MARCH":    f"{A}/n_march_resident_24kwds/n_march_resident/march_full_pipeline/predictions.csv",
-        "CARE-RG":  f"{A}/care_rg_retrieved/rg/predictions.csv",
+        "MDEF":  f"{A}/mdef_retrieved/rg/predictions.csv",
     },
     "ctrate": {
         "Reg2RG":   f"{A}/n_march_resident_24kwds/n_march_resident/ctrate/predictions.csv",
         "CT-GRAPH": f"{A}/n_ct_graph_24kwds/n_ct_graph/ctrate/predictions.csv",
         "MARCH":    f"{A}/n_march_resident_24kwds/n_march_resident/march_full_pipeline_ctrate/predictions.csv",
-        "CARE-RG":  f"{A}/care_rg_retrieved/ctrate/predictions.csv",
+        "MDEF":  f"{A}/mdef_retrieved/ctrate/predictions.csv",
     },
     "inspect": {
         "Reg2RG":   f"{A}/n_march_resident_24kwds/n_march_resident/inspect_wds/predictions.csv",
         "CT-GRAPH": f"{A}/n_ct_graph_24kwds/n_ct_graph/inspect_wds/predictions.csv",
         "MARCH":    f"{A}/n_march_resident_24kwds/n_march_resident/march_full_pipeline_inspect/predictions.csv",
-        "CARE-RG":  f"{A}/care_rg_retrieved/inspect/predictions.csv",
+        "MDEF":  f"{A}/mdef_retrieved/inspect/predictions.csv",
     },
 }
 
@@ -79,7 +79,7 @@ def _canon_id(s):
     """Normalize volume IDs across baseline schemas:
         valid_1199_a_1.nii.gz   -> valid_1199a    (Reg2RG/CT-GRAPH/MARCH)
         valid_1199_a            -> valid_1199a    (other tier files)
-        valid_1199a             -> valid_1199a    (GAV/CARE-RG, already canonical)
+        valid_1199a             -> valid_1199a    (GAV/MDEF, already canonical)
         PE4529af3               -> PE4529af3      (INSPECT, unchanged)
     """
     s = str(s).strip()
@@ -212,16 +212,16 @@ def _precompute_per_sample(gts, preds):
 def bootstrap_pair(tier, baseline_name, metrics, B, n_workers, seed=0):
     paths = PRED_PATHS[tier]
     base = _load_preds(paths[baseline_name])
-    care = _load_preds(paths["CARE-RG"])
+    care = _load_preds(paths["MDEF"])
     merged = base.merge(care, on="id", suffixes=("_b", "_a"))
     n = len(merged)
-    print(f"  {tier:7s}  CARE-RG vs {baseline_name:9s}  n={n}")
+    print(f"  {tier:7s}  MDEF vs {baseline_name:9s}  n={n}")
     gts_a = merged["gt_a"].astype(str).tolist()
     preds_a = merged["pred_a"].astype(str).tolist()
     gts_b = merged["gt_b"].astype(str).tolist()
     preds_b = merged["pred_b"].astype(str).tolist()
 
-    # Pre-compute METEOR and ROUGE-L per sample (CARE-RG and baseline).
+    # Pre-compute METEOR and ROUGE-L per sample (MDEF and baseline).
     # These metrics are linear per-sample averages, so bootstrap on indices
     # is exactly equivalent to recomputing per resample but ~500x faster.
     pre_meteor_a, pre_rouge_a = None, None
@@ -333,7 +333,7 @@ def label_consistency_check(tier, device):
     fused = np.stack(labels).any(axis=0).astype(int)
 
     # Load v3 retrieved
-    care = _load_preds(PRED_PATHS[tier]["CARE-RG"])
+    care = _load_preds(PRED_PATHS[tier]["MDEF"])
     care = care.set_index("id").reindex(vols_ref)
     care = care[care["pred"].notna()]
     keep_idx = [i for i, v in enumerate(vols_ref) if v in care.index]
@@ -409,7 +409,7 @@ def main():
     # Markdown table for paste into paper.
     md_path = os.path.join(OUT_ROOT, "bootstrap_summary.md")
     with open(md_path, "w") as f:
-        f.write("# NLG bootstrap 95% CIs (CARE-RG v3 retrieved vs baselines)\n\n")
+        f.write("# NLG bootstrap 95% CIs (MDEF v3 retrieved vs baselines)\n\n")
         for tier in args.tiers:
             f.write(f"## {tier.upper()}\n\n")
             f.write("| Baseline | Metric | ΔNLG | 95% CI | P(Δ>0) |\n")

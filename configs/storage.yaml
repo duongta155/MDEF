@@ -9,7 +9,7 @@ global:
   radbert_ckpt:   "/data/radbert/RadBertClassifier.pth"  # 18-condition RadBERT extractor
 
 workspace:
-  processed_data: "/data/care_rg/processed"   # WDS shards, cached labels
+  processed_data: "/data/mdef/processed"   # WDS shards, cached labels
   checkpoints:    "checkpoints"               # generator checkpoints
   predictions:    "predictions"               # per-tier predictions.csv + ce_summary.json
   retrieved:      "predictions/retrieved"     # Stage 5 text-head outputs

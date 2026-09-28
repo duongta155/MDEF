@@ -1,4 +1,4 @@
-# Inference configuration shared across all three CARE-RG members
+# Inference configuration shared across all three MDEF members
 # and across all three held-out tiers (RG / CT-RATE / INSPECT).
 # These are the tier-invariant hyperparameters of paper Sec. IV-E
 # ("Stage 5: Tier-Invariant Inference Policy").
@@ -18,7 +18,7 @@ radbert:                                      # Stage 3
 
 fusion:                                       # Stage 4
   operator: logical_or                        # \hat{y}_c = OR_p b_p_c
-  ensemble: [generator_R_1, generator_R_2, generator_P]
+  ensemble: [generator_1, generator_2, generator_3]
 
 text_head:                                    # Stage 5
   top_k_per_condition: 3

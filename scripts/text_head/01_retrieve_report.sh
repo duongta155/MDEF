@@ -6,6 +6,6 @@
 source "$(dirname "$0")/../base.sh"
 
 $PY -m src.text_head.retrieve_report \
-    --infer_config configs/care_rg_infer.yaml \
+    --infer_config configs/mdef_infer.yaml \
     --predictions_root "$PRED_ROOT" \
     --output_root "$RETRIEVED_ROOT"

@@ -11,13 +11,13 @@ for TIER in radgenome ctrate inspect; do
         ctrate)    SHARD="$PROCESSED_ROOT/ctrate_wds";       OUTKEY="ctrate" ;;
         inspect)   SHARD="$PROCESSED_ROOT/inspect_wds";      OUTKEY="inspect" ;;
     esac
-    for MEMBER in generator_R_1 generator_R_2 generator_P; do
+    for MEMBER in generator_1 generator_2 generator_3; do
         OUT="$PRED_ROOT/$MEMBER/${OUTKEY}_K10_UNION"
         mkdir -p "$OUT"
         $PY -m src.evaluation.evaluator \
             --design sd_union \
             --model_path "$CKPT_ROOT/$MEMBER/final_model.pt" \
-            --infer_config configs/care_rg_infer.yaml \
+            --infer_config configs/mdef_infer.yaml \
             --output_dir "$OUT" \
             --shard_dir "$SHARD" \
             --eval_batch_size 8

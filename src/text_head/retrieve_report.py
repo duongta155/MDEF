@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-care_rg_retrieve_report.py
+mdef_retrieve_report.py
 ==========================
 
-Build a "retrieved-sentence" report variant of CARE-RG specifically optimized
+Build a "retrieved-sentence" report variant of MDEF specifically optimized
 for NLG (BLEU-1..4, METEOR, ROUGE-L) against the dataset GT reports.
 
 PIPELINE
@@ -31,7 +31,7 @@ For every volume, per tier:
 
 OUTPUT
 ------
-   $A/care_rg_retrieved/<tier>/predictions.csv  with columns
+   $A/mdef_retrieved/<tier>/predictions.csv  with columns
        volume_name, GT_combined_report, Pred_combined_report
    plus an inline NLG print (BLEU-1..4, METEOR, ROUGE-L) for instant feedback.
 
@@ -43,7 +43,7 @@ import pandas as pd
 
 A = "<DATA_ROOT>/predictions"
 CACHE = os.path.join(A, "ensemble_gav_pathb_label", "_radbert_cache")
-OUT_ROOT = os.path.join(A, "care_rg_retrieved")
+OUT_ROOT = os.path.join(A, "mdef_retrieved")
 
 LABEL_COLS = [
     "Medical material", "Arterial wall calcification", "Cardiomegaly",

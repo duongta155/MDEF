@@ -57,7 +57,7 @@ FUSIONS = [
      [os.path.join(GAV, "ctrate_K10_UNION/predictions.csv"),
       os.path.join(PATHB, "ctrate_K10_UNION/predictions.csv")]),
     # CT-Rate 4-way (added 2026-05-21 for consistent-configuration paper claim:
-    # the committed CARE-RG architecture is the same 4-way OR on every tier).
+    # the committed MDEF architecture is the same 4-way OR on every tier).
     ("ctrate_4way",
      [os.path.join(GAV, "ctrate_K10_UNION/predictions.csv"),
       os.path.join(PATHB, "ctrate_K10_UNION/predictions.csv"),

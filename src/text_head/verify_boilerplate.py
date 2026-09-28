@@ -21,7 +21,7 @@ from collections import Counter
 RG_TRAIN_CSV = "<DATA_ROOT>/radgenome_ct2rep_reports.csv"
 
 # The 6 Stage 5 boilerplate sentences (verbatim from
-# care_rg_retrieve_report.py:REGION_BOILERPLATE).
+# mdef_retrieve_report.py:REGION_BOILERPLATE).
 BOILERPLATE = {
     "abdomen": "No significant pathology was detected in the abdominal sections.",
     "bone structures": "Bone structures in the study area are natural.",
@@ -108,8 +108,8 @@ def main():
         print(f"  {c:>5}x  {s[:120]}")
 
     os.makedirs("<DATA_ROOT>/"
-                "analysis/care_rg_boilerplate_audit", exist_ok=True)
-    out = "<DATA_ROOT>/predictions/care_rg_boilerplate_audit/audit.json"
+                "analysis/mdef_boilerplate_audit", exist_ok=True)
+    out = "<DATA_ROOT>/predictions/mdef_boilerplate_audit/audit.json"
     with open(out, "w") as f:
         json.dump(results, f, indent=2)
     print(f"\nWrote {out}")

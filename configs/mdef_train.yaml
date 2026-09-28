@@ -1,14 +1,14 @@
-# Training configuration for a single CARE-RG ensemble member.
+# Training configuration for a single MDEF ensemble member.
 # Reproduces the recipe described in Section IV-A of the paper.
 # The three ensemble members share this recipe and differ only in:
-#   * generator_R_1: Reg2RG-initialised, seed=1
-#   * generator_R_2: Reg2RG-initialised, seed=2
-#   * generator_P:   Reg2RG-warmstart with auxiliary 18-condition head + seed=1
+#   * generator_1: Reg2RG-initialised, seed=1
+#   * generator_2: Reg2RG-initialised, seed=2
+#   * generator_3:   Reg2RG-warmstart with auxiliary 18-condition head + seed=1
 
 experiment:
-  name: care_rg_member
+  name: mdef_member
   seed: 1
-  output_dir: checkpoints/generator_R_1     # change per member
+  output_dir: checkpoints/generator_1     # change per generator
   init_from: reg2rg                          # {reg2rg, pathology_warmstart}
 
 data:

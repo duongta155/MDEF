@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Generate the LaTeX replacement body of Table 3 (tab:per_cond_all) showing
-per-condition Precision, Recall, F1 for CARE-RG vs MARCH only, across
+per-condition Precision, Recall, F1 for MDEF vs MARCH only, across
 RG / CTR / INS, with values in SEPARATE columns. Bolds the winner per
 (condition, dataset, metric) cell.
 

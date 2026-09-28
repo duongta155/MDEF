@@ -6,7 +6,7 @@ import sys
 from pathlib import Path
 
 
-def setup_logger(name: str = "care_rg",
+def setup_logger(name: str = "mdef",
                   log_dir: str | Path | None = None,
                   level: int = logging.INFO) -> logging.Logger:
     logger = logging.getLogger(name)
