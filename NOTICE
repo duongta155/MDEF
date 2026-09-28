@@ -1,0 +1,26 @@
+MDEF: Multi-Report Deep Ensemble Fusion for 3D CT Report Generation
+Copyright 2026 Tung Duong Ta and the MDEF authors
+
+Licensed under the Apache License, Version 2.0 (see LICENSE).
+
+This project includes code adapted from the following third-party projects.
+Their original copyright and license notices are retained in the source files.
+
+- DETR (https://github.com/facebookresearch/detr), Apache License 2.0,
+  Copyright (c) Facebook, Inc. and its affiliates.
+  Used in: src/models/transformer_decoder.py, src/models/position_encoding.py
+
+- SAM 2 (https://github.com/facebookresearch/sam2), Apache License 2.0,
+  Copyright (c) Meta Platforms, Inc. and affiliates.
+  Used in: src/models/cross_attention.py (MLP, TwoWayTransformer, get_sdpa_settings)
+
+- flamingo-pytorch (https://github.com/lucidrains/flamingo-pytorch), MIT License,
+  Copyright (c) Phil Wang.
+  Used in: src/models/helpers.py
+
+- PMC-CLIP (https://github.com/WeixiongLin/PMC-CLIP), MIT License.
+  Used in: src/models/blocks.py
+
+- RadFM (https://github.com/chaoyi-wu/RadFM), MIT License.
+  Pretrained vision encoder and perceiver weights are loaded from RadFM in
+  src/models/embedding_layer.py. The weights are not redistributed here.

@@ -1,9 +1,10 @@
 [project]
 name = "mdef"
 version = "0.1.0"
-description = "MDEF: Candidate Aggregation with Recall-Enhanced Ensembling for 3D CT Report Generation"
+description = "MDEF: Multi-Report Deep Ensemble Fusion for 3D CT Report Generation"
 readme = "README.md"
 requires-python = ">=3.10"
+license = "Apache-2.0"
 dependencies = [
     "torch>=2.0",
     "torchvision",

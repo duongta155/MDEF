@@ -45,7 +45,8 @@ USE_FLASH_ATTN = False
 MATH_KERNEL_ON = True
 OLD_GPU = True
 
-# Lightly adapted from
+# Adapted from SAM 2 (https://github.com/facebookresearch/sam2), Apache License 2.0,
+# which in turn lightly adapted it from
 # https://github.com/facebookresearch/MaskFormer/blob/main/mask_former/modeling/transformer/transformer_predictor.py # noqa
 class MLP(nn.Module):
     def __init__(

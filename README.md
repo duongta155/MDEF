@@ -1,6 +1,8 @@
 # MDEF: Multi-Report Deep Ensemble Fusion for 3D CT Report Generation
 
-> Paper under double-blind review.
+Tung Duong Ta, Tim Oates, Manas Gaur, Trong-Nghia Nguyen, Tien-Cuong Nguyen, Tuan-Cuong Vuong, Trang Xuan Mai, and Thien Van Luong
+
+> Accepted as a regular paper at the Workshop on Large Language Models for Multimodal Data Fusion (LLM4MDF), IEEE International Conference on Data Mining (ICDM 2026).
 
 ## Overview
 
@@ -12,9 +14,11 @@ MDEF turns the single-report paradigm into a multi-report paradigm. The pipeline
 2. Stage 2 (Stochastic Decoding per generator). Each generator samples `K=10` candidate reports at temperatures linearly staggered over `[0.7, 1.3]`. The K candidates are concatenated into one extended report `R_c(V)` per generator.
 3. Stage 3 (RadBERT label extraction). The pre-trained RadBERT clinical extractor maps each generator's extended report to a binary 18-pathology vector.
 4. Stage 4 (Per-pathology logical-OR late fusion). The three binary vectors are fused at the clinical-pathology level. Any pathology mentioned by any generator survives the fusion.
-5. Stage 5 (Tier-invariant inference policy). Every inference-time hyperparameter is fixed once on RadGenome. The same values are reused unchanged on CT-RATE and INSPECT.
+5. Stage 5 (Text head). A deterministic text head generates the final report from the fused 18-pathology vector and the per-generator extended reports.
 
-Trained only on RadGenome and evaluated on RadGenome, CT-RATE, and INSPECT, MDEF reaches CE F1 **0.3999** on RadGenome (in-distribution), **0.3381** on CT-RATE (cross-dataset), and **0.1813** on INSPECT (cross-institution). The gain over the strongest single-report baseline is `+0.079`, `+0.045`, and `+0.010` respectively. The CE F1 gain is driven by recall. Averaged over the 18 pathologies, recall rises by `+70%` to `+97%` relative across the three datasets.
+Every inference-time hyperparameter is fixed once on RadGenome. The same values are reused unchanged on CT-RATE and INSPECT.
+
+Trained only on RadGenome and evaluated on RadGenome, CT-RATE, and INSPECT, MDEF reaches CE F1 **0.3999** on RadGenome (in-distribution), **0.3381** on CT-RATE (cross-dataset), and **0.1813** on INSPECT (cross-institution). MDEF outperforms MARCH, the best single-report baseline, by `+0.079` CE F1 on RadGenome and `+0.045` on CT-RATE, with a small positive margin (`+0.008`) on INSPECT. The CE F1 gain is driven by recall. Averaged over the 18 pathologies, recall rises by `+70%` to `+97%` relative across the three datasets.
 
 ## Table of Contents
 
@@ -229,14 +233,16 @@ mdef/
 ## Citation
 
 ```bibtex
-@article{mdef_2026,
-  title  = {MDEF: Multi-Report Deep Ensemble Fusion for 3D CT Report Generation},
-  author = {Anonymous},
-  year   = {2026},
-  note   = {Under review}
+@inproceedings{ta2026mdef,
+  title     = {MDEF: Multi-Report Deep Ensemble Fusion for 3D CT Report Generation},
+  author    = {Ta, Tung Duong and Oates, Tim and Gaur, Manas and Nguyen, Trong-Nghia and Nguyen, Tien-Cuong and Vuong, Tuan-Cuong and Mai, Trang Xuan and Luong, Thien Van},
+  booktitle = {IEEE International Conference on Data Mining Workshops (ICDMW), Workshop on Large Language Models for Multimodal Data Fusion (LLM4MDF)},
+  year      = {2026}
 }
 ```
 
 ## License
 
-This code is provided for research and review purposes only.
+This code is released under the [Apache License 2.0](LICENSE). Some model files are adapted from third-party projects under their own licenses. See [NOTICE](NOTICE) for details.
+
+The datasets are not redistributed here. RadGenome-ChestCT, CT-RATE, and INSPECT remain under their own licenses and data use agreements.
