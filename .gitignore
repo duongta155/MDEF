@@ -33,7 +33,7 @@ logs/
 .ipynb_checkpoints/
 
 # Datasets (do not commit raw or processed data)
-data/
+/data/
 *.nii
 *.nii.gz
 *.npz

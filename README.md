@@ -63,12 +63,15 @@ Key dependencies are declared in `pyproject.toml`.
 
 | Dataset | Description | Access |
 |---------|-------------|--------|
-| RadGenome-ChestCT | In-distribution training and validation | [HuggingFace dataset](https://huggingface.co/datasets/mychen76/RadGenome-ChestCT) |
+| RadGenome-ChestCT | In-distribution training and validation | [HuggingFace dataset](https://huggingface.co/datasets/RadGenome/RadGenome-ChestCT) |
 | CT-RATE | Same-modality cross-dataset held-out tier | [HuggingFace dataset](https://huggingface.co/datasets/ibrahimhamamci/CT-RATE) |
-| INSPECT | Cross-institution Stanford CTPA cohort | [PhysioNet](https://physionet.org/content/inspect/1.0.0/) |
+| INSPECT | Cross-institution Stanford CTPA cohort | [Stanford AIMI](https://aimi.stanford.edu/datasets/inspect-Multimodal-Dataset-for-Pulmonary-Embolism-Diagnosis-and-Prognosis) |
 | RadBERT-RoBERTa-4m | 18-pathology clinical extractor weights | [HuggingFace model](https://huggingface.co/zzxslp/RadBERT-RoBERTa-4m). The classifier head is supplied with the public Reg2RG release. |
 
-INSPECT requires PhysioNet credentialed access. First complete the required training course at [CITI Program](https://about.citiprogram.org/).
+INSPECT is released by Stanford AIMI for non-commercial use under a data use agreement. Request
+access on the dataset page, accept the agreement, then copy the SAS URL that AIMI issues. That URL
+expires, so fetch the data soon after it is issued. Treat the volumes as owner-only, as the
+agreement requires.
 
 ### 2.2 Configuration
 
@@ -232,11 +235,13 @@ mdef/
 
 ## Citation
 
+Project page: https://vnpt-ai-official.github.io/ICDM2026-MDEF/
+
 ```bibtex
 @inproceedings{ta2026mdef,
-  title     = {MDEF: Multi-Report Deep Ensemble Fusion for 3D CT Report Generation},
+  title     = {{MDEF}: Multi-Report Deep Ensemble Fusion for {3D} {CT} Report Generation},
   author    = {Ta, Tung Duong and Oates, Tim and Gaur, Manas and Nguyen, Trong-Nghia and Nguyen, Tien-Cuong and Vuong, Tuan-Cuong and Mai, Trang Xuan and Luong, Thien Van},
-  booktitle = {IEEE International Conference on Data Mining Workshops (ICDMW), Workshop on Large Language Models for Multimodal Data Fusion (LLM4MDF)},
+  booktitle = {Proceedings of the IEEE International Conference on Data Mining (ICDM)},
   year      = {2026}
 }
 ```
