@@ -4,6 +4,8 @@ Tung Duong Ta, Tim Oates, Manas Gaur, Trong-Nghia Nguyen, Tien-Cuong Nguyen, Tua
 
 > Accepted as a regular paper at the Workshop on Large Language Models for Multimodal Data Fusion (LLM4MDF), IEEE International Conference on Data Mining (ICDM 2026).
 
+[Project page](https://vnpt-ai-official.github.io/ICDM2026-MDEF/) | [Poster](poster/DM2048.pdf) ([Vietnamese](poster/DM2048_vi.pdf))
+
 ## Overview
 
 Automated 3D chest CT report generation is dominated by a single-report paradigm. A 3D vision encoder feeds an autoregressive language model. The language model decodes one textual report per input volume via greedy or beam search. Under the clinical-efficacy (CE) F1 metric over 18 chest-CT pathologies extracted by a pre-trained RadBERT clinical extractor, this paradigm shows high precision but low recall. Many pathologies are simply not mentioned in the single report.
@@ -30,6 +32,7 @@ Trained only on RadGenome and evaluated on RadGenome, CT-RATE, and INSPECT, MDEF
 6. [Text Head and NLG Scoring](#6-text-head-and-nlg-scoring)
 7. [Evaluation](#7-evaluation)
 8. [Repository Structure](#8-repository-structure)
+9. [Poster](#9-poster)
 
 ## 1. Requirements
 
@@ -211,6 +214,7 @@ mdef/
 │   ├── mdef_train.yaml         Stage 1 fine-tuning recipe (shared across generators)
 │   ├── mdef_infer.yaml         Stage 2 and Stage 5 tier-invariant constants
 │   └── storage.yaml            paths
+├── poster/                     ICDM 2026 poster, English and Vietnamese
 ├── scripts/
 │   ├── base.sh                 sourced by every script. Reads storage.yaml.
 │   ├── data/                   dataset download and WDS preprocessing
@@ -232,6 +236,15 @@ mdef/
     ├── evaluation/             CE F1, NLG, bootstrap, per-pathology table
     └── utils/                  shared utilities (logger, etc.)
 ```
+
+## 9. Poster
+
+The poster presented at LLM4MDF is in [`poster/`](poster/). `DM2048` is the ICDM paper ID.
+
+| File | Language |
+| --- | --- |
+| [`poster/DM2048.pdf`](poster/DM2048.pdf) | English, the file submitted to the conference |
+| [`poster/DM2048_vi.pdf`](poster/DM2048_vi.pdf) | Vietnamese translation |
 
 ## Citation
 
